@@ -3,6 +3,8 @@ const passport = require('passport');
 const authRoute = require('./authRouter');
 const userService = require('./usersRouter');
 const customerService = require('./customerRouter');
+const productService = require('./productRouter');
+const ingredientService = require('./ingredientRouter');
 
 const mainRouter = (app)=>{
     const router = express.Router(); // PERMITE PETICIONES HTTP
@@ -13,6 +15,8 @@ const mainRouter = (app)=>{
 
         router.use('/user', userService);
         router.use('/customer', customerService);
+        router.use('/product', productService);
+        router.use('/ingredient', ingredientService);
 }
 
 module.exports =  mainRouter ;
