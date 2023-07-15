@@ -1,23 +1,25 @@
 const Joi = require('joi');
 
+const id = Joi.number().integer();
 const portion = Joi.number().integer();
-const productId = Joi.number().integer();
 const ingredientId = Joi.number().integer();
+const listProductId = Joi.number().integer();
 
 
 const getProductDetailSchema = Joi.object({
-    productId: productId.required(),
-    ingredientId: ingredientId.required(),
+    id: id.required(),
 });
 
 const createProductDetailSchema = Joi.object({
     portion: portion.required(),
-    productId: productId.required(),
     ingredientId: ingredientId.required(),
+    listProductId: listProductId.required(),
 });
 
 const updateProductDetailSchema = Joi.object({
     portion: portion.required(),
+    ingredientId: ingredientId.required(),
+    listProductId: listProductId.required(),
 });
 
 module.exports = { getProductDetailSchema, createProductDetailSchema, updateProductDetailSchema };

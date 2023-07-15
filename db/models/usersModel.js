@@ -34,6 +34,10 @@ class User extends Model {
       as:'customer',
       foreignKey: 'idUsuario'
     })
+    this.hasMany(models.ListProduct,{
+      as:'listProduct',
+      foreignKey:'orderId'
+    })
   }
 
   static config(sequelize) {

@@ -45,7 +45,7 @@ class Customer extends Model {
   static associate(models) {
     this.belongsTo(models.User, {as: 'user'}); // relacion de 1:1 para que al consumur los clientes tambien se vea la info de usuario
     this.hasMany(models.Order, {
-      as: 'order',
+      as: 'orders',
       foreignKey: 'customerId'
     });
   }

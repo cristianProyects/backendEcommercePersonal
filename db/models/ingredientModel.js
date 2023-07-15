@@ -23,8 +23,12 @@ const IngredientSchema =  {
 
 class Ingredient extends Model {
 
-    static associate() {
-        // associate    
+    static associate(models) {
+        // associate 
+        this.hasMany(models.ProductDetail,{
+            as:'ingredients',
+            foreignKey:'ingredientId'
+        })   
     }
 
     static config(sequelize) {

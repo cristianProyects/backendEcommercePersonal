@@ -1,7 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 
 const { CUSTOMER_TABLE } = require('./customerModel');
-const { PRODUCT_DETAIL_TABLE } = require('./productDetailModel');
 
 const ORDER_TABLE = 'pedidos';
 
@@ -22,24 +21,20 @@ const OrderSchema =  {
         },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL'
-    },
-    productDetailId: {
-        field: 'producto_detalle_id',
-        allowNull: false,
-        type: DataTypes.INTEGER,
-        references: {
-            model: PRODUCT_DETAIL_TABLE,
-            key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
-    },
+    }
 }
 
 class Order extends Model {
 
-    static associate() {
+    static associate(models) {
        // associate
+        this.belongsTo(models.Customer, {
+            as: 'customer',
+        });
+        this.hasMany(models.ListProduct,{
+            as:'listProduct',
+            foreignKey:'orderId'
+        })
     }
 
     static config(sequelize) {

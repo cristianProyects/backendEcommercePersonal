@@ -1,52 +1,52 @@
 const { Model, DataTypes } = require('sequelize');
 
-const { LIST_PRODUCT_TABLE } = require('./listProduct');
-const { INGREDIENT_TABLE } = require('./ingredientModel');
+const { PRODUCT_TABLE } = require('./productsModel');
+const { ORDER_TABLE } = require('./orderModel');
+const { PRODUCT_DETAIL_TABLE } = require('./productDetailModel');
 
-const PRODUCT_DETAIL_TABLE = 'producto_detalle';
+const LIST_PRODUCT_TABLE = 'lista_productos';
 
-const ProdcutDetailSchema =  {
+const ListProductSchema =  {
     id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER
     },
-    portion: {
-        allowNull: false,
-        type: DataTypes.INTEGER,
-        field: 'porcion',
-    },
-    ingredientId: {
-        field: 'ingrediente_id',
+    orderId: {
+        field: 'pedido_id',
         allowNull: false,
         type: DataTypes.INTEGER,
         references: {
-            model: INGREDIENT_TABLE,
+            model: ORDER_TABLE,
             key: 'id'
         },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL'
     },
-    listProductId: {
-        field: 'producto_lista_id',
+    productId: {
+        field: 'producto__id',
         allowNull: false,
         type: DataTypes.INTEGER,
         references: {
-            model: LIST_PRODUCT_TABLE,
+            model: PRODUCT_TABLE,
             key: 'id'
         },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL'
-    },
+    }
 }
 
-class ProductDetail extends Model {
+class ListProduct extends Model {
 
     static associate(models) {
        // associate
-        // this.belongsTo(models.Product,{as:'product'});
-        this.belongsTo(models.Ingredient,{as:'ingredient'});
+        this.belongsTo(models.Product,{as:'product'});
+        this.hasMany(models.ProductDetail, { 
+            as:'productDetail',
+            foreignKey: 'listProductId'
+        })
+        // this.belongsTo(models.Ingredient,{as:'ingredient'});
         // this.belongsToMany(models.Customer, { // n:m
         //     as: 'items-order',
         //     through: models.Order,
@@ -58,11 +58,11 @@ class ProductDetail extends Model {
     static config(sequelize) {
         return {
             sequelize,
-            tableName: PRODUCT_DETAIL_TABLE,
-            modelName: 'ProductDetail',
+            tableName: LIST_PRODUCT_TABLE,
+            modelName: 'ListProduct',
             timestamps: false
         }
     }
 }
 
-module.exports = { ProductDetail, ProdcutDetailSchema, PRODUCT_DETAIL_TABLE };
+module.exports = { ListProduct, ListProductSchema, LIST_PRODUCT_TABLE };

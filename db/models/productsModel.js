@@ -24,13 +24,16 @@ const ProductSchema =  {
 class Product extends Model {
 
     static associate(models) {
-        
-        this.belongsToMany(models.Ingredient, { // n:m
-            as: 'productDetail',
-            through: models.ProductDetail,
-            foreignKey: 'productId',
-            otherKey: 'ingredientId'
-        });   
+        this.hasMany(models.ListProduct,{
+            as:'listProduct',
+            foreignKey:'productId'
+        })
+        //     this.belongsToMany(models.Ingredient, { // n:m
+        //     as: 'productDetail',
+        //     through: models.ProductDetail,
+        //     foreignKey: 'productId',
+        //     otherKey: 'ingredientId'
+        // });   
         // associate 
         //  (Nombre de la otra tabla en la que tiene la relacion de muchos a muchos){
             // as:'alias para esa relacion de muchos a muchos' ,
