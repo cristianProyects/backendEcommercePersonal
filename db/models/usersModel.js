@@ -32,11 +32,8 @@ class User extends Model {
     // associate
     this.hasOne(models.Customer, { // relacion 1:1 para que al consumir los usuarios se vea tambien la informacion de la tabla clientes
       as:'customer',
-      foreignKey: 'idUsuario'
-    })
-    this.hasMany(models.ListProduct,{
-      as:'listProduct',
-      foreignKey:'orderId'
+      foreignKey: 'idUsuario',
+      onDelete: 'CASCADE'
     })
   }
 

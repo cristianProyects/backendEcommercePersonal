@@ -5,10 +5,7 @@ class OrderServices {
 
     constructor(){
         this.table = models.Order
-    }
-
-    async get(){
-        const list = await this.table.findAll({
+        this.options = {
             include: [
                 {
                     association: 'customer',
@@ -22,23 +19,19 @@ class OrderServices {
                     }]
                 },
             ]   
-        });
+        }
+    }
+
+    async get(){
+        const list = await this.table.findAll(this.options);
         return list; 
     }
     async create(order){
         const data = await this.table.create(order)
         return data;
     }
-    async update(data, id){
-        const order = await this.table.findByPk(id);
-        if(!order){
-            throw boom.notFound('order not found')
-        }
-        const updateOrder = await order.update(data);
-        return { updated: true, updateOrder };
-    }
     async delete (id){
-        const order = await this.table.findByPk(id);
+        const order = await this.table.findByPk(id,this.options);
         if(!order){
             throw boom.notFound('order not found')
         }

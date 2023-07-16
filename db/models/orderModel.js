@@ -20,7 +20,7 @@ const OrderSchema =  {
             key: 'id'
         },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
+        onDelete: 'CASCADE'
     }
 }
 
@@ -33,7 +33,9 @@ class Order extends Model {
         });
         this.hasMany(models.ListProduct,{
             as:'listProduct',
-            foreignKey:'orderId'
+            foreignKey:'orderId',
+            onDelete: 'CASCADE',
+            hooks:true
         })
     }
 

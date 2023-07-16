@@ -22,7 +22,7 @@ const ListProductSchema =  {
             key: 'id'
         },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
+        onDelete: 'CASCADE'
     },
     productId: {
         field: 'producto__id',
@@ -33,7 +33,7 @@ const ListProductSchema =  {
             key: 'id'
         },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
+        onDelete: 'CASCADE'
     }
 }
 
@@ -44,7 +44,9 @@ class ListProduct extends Model {
         this.belongsTo(models.Product,{as:'product'});
         this.hasMany(models.ProductDetail, { 
             as:'productDetail',
-            foreignKey: 'listProductId'
+            foreignKey: 'listProductId',
+            onDelete: 'CASCADE',
+            hooks:true
         })
         // this.belongsTo(models.Ingredient,{as:'ingredient'});
         // this.belongsToMany(models.Customer, { // n:m

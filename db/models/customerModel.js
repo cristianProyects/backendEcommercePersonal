@@ -27,7 +27,7 @@ const CustomerSchema =  {
     field: 'telefono',
   },
   userId: {
-    // allowNull: false,
+    allowNull: false,
     field: 'idUsuario',
     type: DataTypes.INTEGER,
     unique: true,
@@ -36,17 +36,19 @@ const CustomerSchema =  {
         key: 'id'
     },
     onUpdate: 'CASCADE',
-    onDelete: 'SET NULL'
+    onDelete: 'CASCADE'
   }
 }
 
 class Customer extends Model {
 
   static associate(models) {
-    this.belongsTo(models.User, {as: 'user'}); // relacion de 1:1 para que al consumur los clientes tambien se vea la info de usuario
+    this.belongsTo(models.User, {as: 'user', onDelete: 'CASCADE', hooks:true }); // relacion de 1:1 para que al consumur los clientes tambien se vea la info de usuario
     this.hasMany(models.Order, {
       as: 'orders',
-      foreignKey: 'customerId'
+      foreignKey: 'customerId',
+      onDelete: 'CASCADE',
+      hooks:true // solo se habilita en el hasMnay
     });
   }
 

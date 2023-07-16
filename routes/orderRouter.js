@@ -24,5 +24,15 @@ router.post('/',
         next(error);
     }
 });
+router.delete('/:id',
+    validatorHandler(getOrderSchema,'params'),
+    async (req, res, next ) => {
+    try {
+        const { id } =  req.params
+        res.send(await order.delete(id))
+    } catch (error) {
+        next(error);
+    }
+});
 
 module.exports = router;

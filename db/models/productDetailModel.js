@@ -26,7 +26,7 @@ const ProdcutDetailSchema =  {
             key: 'id'
         },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
+        onDelete: 'CASCADE'
     },
     listProductId: {
         field: 'producto_lista_id',
@@ -37,7 +37,7 @@ const ProdcutDetailSchema =  {
             key: 'id'
         },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
+        onDelete: 'CASCADE'
     },
 }
 
