@@ -1,11 +1,12 @@
 const Joi = require('joi');
 
+const id = Joi.number().integer();
 const productId = Joi.number().integer();
 const orderId = Joi.number().integer();
 
 
 const getProdcutListSchema = Joi.object({
-    orderId: orderId.required(),
+    id: id.required()
 });
 
 const createProdcutListSchema = Joi.object({
@@ -14,8 +15,7 @@ const createProdcutListSchema = Joi.object({
 });
 
 const updateProdcutListSchema = Joi.object({
-    productId: productId.required(),
-    orderId: orderId.required(),
+    productId: productId
 });
 
 module.exports = { getProdcutListSchema, createProdcutListSchema, updateProdcutListSchema };

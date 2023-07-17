@@ -17,7 +17,7 @@ class ListProductServices {
         const data = await this.table.create(listProduct)
         return data;
     }
-    async update(data, id){
+    async update(id, data){
         const listProduct = await this.table.findByPk(id);
         if(!listProduct){
             throw boom.notFound('listProduct not found')

@@ -24,5 +24,26 @@ router.post('/',
         next(error);
     }
 });
+router.patch('/:id',
+    validatorHandler(getProductDetailSchema,'params'),
+    validatorHandler(updateProductDetailSchema,'body'),
+    async (req, res, next ) => {
+    try {
+        const { id } = req.params
+        res.send(await productDetail.update(req.body, id))
+    } catch (error) {
+        next(error);
+    }
+});
+router.delete('/:id',
+    validatorHandler(getProductDetailSchema,'params'),
+    async (req, res, next ) => {
+    try {
+        const { id } = req.params
+        res.send(await productDetail.delete(id))
+    } catch (error) {
+        next(error);
+    }
+});
 
 module.exports = router;

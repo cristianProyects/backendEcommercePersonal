@@ -17,9 +17,8 @@ const createProductDetailSchema = Joi.object({
 });
 
 const updateProductDetailSchema = Joi.object({
-    portion: portion.required(),
-    ingredientId: ingredientId.required(),
-    listProductId: listProductId.required(),
+    portion: portion,
+    ingredientId: ingredientId,
 });
 
 module.exports = { getProductDetailSchema, createProductDetailSchema, updateProductDetailSchema };
